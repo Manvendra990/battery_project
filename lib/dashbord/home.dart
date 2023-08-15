@@ -7,6 +7,15 @@ import 'package:battery_alarm/utils/images_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:battery_plus/battery_plus.dart';
+import 'package:intl/intl.dart';
+
+// String formattedDate = DateFormat('yyyy-MM-dd').format(specificDate);
+// print(formattedDate); // Outputs: 2023-08-15
+
+String datetime = DateTime.now().toString();
+String tdata = DateFormat("hh:mm: a").format(DateTime.now());
+String cdate = DateFormat("dd-MM-yyyy").format(DateTime.now());
+
 
 class Home_screen extends StatefulWidget {
   const Home_screen({super.key});
@@ -27,6 +36,43 @@ class _Home_screenState extends State<Home_screen> {
   int _batteryLevel = 0;
   late Timer timer;
   bool? _isInPowerSaveMode;
+
+
+  @override
+
+void initState(){
+super.initState();
+_batteryStateSubscription = _battery.onBatteryStateChanged.listen((BatteryState state) {
+
+setState(() {
+  _batteryState = state;
+});
+get_lavel();
+
+ });
+
+}
+
+
+
+Future <void> get_lavel() async{
+
+final int batteryLevel = await _battery.batteryLevel;
+
+setState(() {
+  _batteryLevel = batteryLevel;
+});
+}
+
+
+@override
+void dispose(){
+  super.dispose();
+  if(_batteryStateSubscription != null){
+    _batteryStateSubscription!.cancel();
+  }
+}
+
 
 
   @override
@@ -75,7 +121,7 @@ class _Home_screenState extends State<Home_screen> {
                       height: 4,
                     ),
                     Text(
-                      '70%',
+                    "$_batteryLevel",
                       style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
                     SizedBox(
@@ -96,7 +142,7 @@ class _Home_screenState extends State<Home_screen> {
                 height: 40,
               ),
               Text(
-                "11:30 AM - 11-08-2023",
+                "$tdata - $cdate",
                 style: TextStyle(color: Colors.white),
               ),
               SizedBox(

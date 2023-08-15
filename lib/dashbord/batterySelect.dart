@@ -1,7 +1,7 @@
 import 'package:battery_alarm/common/select_Buttons.dart';
 import 'package:battery_alarm/utils/colors.dart';
 import 'package:flutter/material.dart';
-
+import 'package:audioplayers/audioplayers.dart';
 import 'audio_record.dart';
 
 class Batter_Select extends StatelessWidget {
@@ -18,6 +18,12 @@ class Batter_Select extends StatelessWidget {
   "81%", "82%", "83%", "84%", "85%", "86%", "87%", "88%", "89%", "90%",
   "91%", "92%", "93%", "94%", "95%", "96%", "97%", "98%", "99%", "100%",
 ];
+
+
+  AudioPlayer audioPlayer = AudioPlayer();
+  String audioState = 'Stopped';
+
+
 
 
 

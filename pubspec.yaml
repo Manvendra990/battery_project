@@ -40,6 +40,8 @@ dependencies:
   dio: ^5.3.2
   percent_indicator: ^4.2.3
   battery_plus: ^4.0.2
+  intl: ^0.18.1
+  audioplayers: ^5.1.0
 
 dev_dependencies:
   flutter_test:
